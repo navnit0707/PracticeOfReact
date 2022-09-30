@@ -28,7 +28,13 @@ const resetCount = ({} = {}) =>({
     type: 'RESET',
 
 });
-const store = createStore((state ={count: 0}, action)=>{
+
+// Reducer 
+// 1. reducer are pure function i.e it entirely depend on the input it recieved and it dpesnt affect anything
+// 2 never change state or action : i.e inside that we dont mutate them or change them
+// if we have to we just create new object and assign to it 
+
+const countReducer = (state ={count: 0}, action)=>{
 
     switch (action.type){
         case 'INCREMENT':
@@ -50,7 +56,9 @@ const store = createStore((state ={count: 0}, action)=>{
         default:
             return state;
     }
-});
+};
+
+const store = createStore(countReducer);
 
 //subscribe : every time state changes this will keep track and update
 // point if we call unsuscribe this will be stop suscribing the changes
@@ -73,7 +81,7 @@ store.dispatch(decrementCount());
 
 store.dispatch(resetCount());
 
-store.dispatch(setCount({count:10}));
+store.dispatch(setCount({count:100}));
 
 
 
